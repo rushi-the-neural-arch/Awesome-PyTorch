@@ -15,7 +15,7 @@ class Network(nn.Module):
         self.fc1 = nn.Linear(in_features = 12*4*4, out_features = 120)
         self.fc2 = nn.Linear(in_features = 120, out_features = 60)
         self.out = nn.Linear(in_features = 60, out_features = 10)
-
+    
     def forward(self, t):
 
         # (1) input layer
