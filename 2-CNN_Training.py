@@ -7,7 +7,7 @@ import torch.optim as optim
 
 torch.set_printoptions(linewidth=120)
 torch.set_grad_enabled(True) # True by default
-
+                        
 print(torch.__version__)
 print(torchvision.__version__)
 
@@ -22,7 +22,7 @@ class Network(nn.Module):
 
         self.fc1 = nn.Linear(in_features = 12*4*4,out_features = 120)
         self.fc2 = nn.Linear(in_features = 120, out_features = 60)
-        self.out = nn.Linear(in_features = 6, out_features = 10)
+        self.out = nn.Linear(in_features = 60, out_features = 10)
 
     def forward(self,t):
         # (1) Input layer
@@ -51,3 +51,111 @@ class Network(nn.Module):
         t = self.out(t)
 
         return t
+
+
+train_set = torchvision.datasets.FashionMNIST(
+    root = '/Users/rushirajsinhparmar/Downloads/PyTorch/',
+    train = True,
+    download = False,
+    transform = transforms.Compose([transforms.ToTensor()])
+)
+
+network = Network()
+
+train_loader = torch.utils.data.DataLoader(train_set, batch_size = 32)
+
+
+
+                    ###################### FOR A SINGLE BATCH ############################# 
+
+
+
+bacth = next(iter(train_loader))
+
+images,labels = bacth
+
+# Calculating the loss 
+
+preds = network(images)
+
+loss = F.cross_entropy(preds,labels) # Calculate the loss
+
+loss.item()
+print(loss.item())
+
+# Calculating the Gradients
+
+print(network.conv1.weight.grad)
+
+loss.backward()
+
+network.conv1.weight.grad.shape
+
+# Update the weights
+
+optimizer = optim.Adam(network.parameters(), lr = 0.01)
+
+loss.item()
+
+get_num_correct(preds,labels)
+
+optimizer.step()
+
+# VERIFY the TRAINING after one batch
+
+preds = network(images) # JUST TO VERIFY
+loss = F.cross_entropy(preds,labels)
+loss.item()
+get_num_correct(preds,labels)
+
+
+
+
+
+        ######################### FOR A SINGLE EPOCH IN TRAINLOADER #################################
+
+total_loss = 0
+total_correct = 0
+
+for batch in train_loader:
+    
+    images, labels = batch
+
+    preds = network(images)
+    loss = F.cross_entropy(preds,labels)
+
+    optimizer.zero_grad()
+
+    loss.backward()
+    optimizer.step()
+
+    total_loss += loss.item()
+    total_correct += get_num_correct(preds,labels)
+
+print("epoch: ", 0, "loss: ", loss.item(), "total_correct: ", get_num_correct(preds,labels))
+
+
+
+        ###################### FOR ALL EPOCHS IN A TRAIN LOADER ###########################
+
+
+
+for epochs in range(5):
+
+    total_loss = 0
+    total_correct = 0
+
+    for batch in train_loader: 
+        image, labels = batch 
+
+        preds = network(images)
+        loss = F.cross_entropy(preds,labels)
+
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        total_loss += loss.item()
+        total_correct += get_num_correct(preds,labels)
+
+    print("Epoch: ", epochs, "Loss: ", total_loss, "total_correct: ", total_correct)
