@@ -1,3 +1,5 @@
+# Run: tensorboard --logdir=runs  in terminal to view in localhost
+
 from torch.utils.tensorboard import SummaryWriter
 
 import torch
@@ -7,15 +9,6 @@ import torch.nn.functional as F
 import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
-
-from datetime import datetime
-
-from sklearn.metrics import confusion_matrix
-import matplotlib.pyplot as plt
-
-import itertools
-import numpy as np
-import matplotlib.pyplot as plt
 
 from datetime import datetime
 
@@ -61,6 +54,11 @@ class Network(nn.Module):
         t = self.out(t)
 
         return t
+
+# RETURNS Names of All the parmaeters in the network - useful later on for Tensorboard
+
+for name, weight in network.named_parameters():
+    print(name, weight.shape)
 
 
 
@@ -134,7 +132,7 @@ for epoch in range(3):
     tb.add_histogram("Conv2.weight", network.conv2.weight, epoch)
 
 
-    print("Epoch: ", epoch, "Loss: ", total_loss, "total_corect: ", total_correct)
+    print("Epoch: ", epoch, "Loss: ", total_loss, "total_corect: ", total_correct, "Accuracy: ", total_correct/len(train_set))
 
 
 
