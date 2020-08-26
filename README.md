@@ -1,4 +1,4 @@
-# PyTorch
+# Deep Lizard PyTorch Series
 PyTorch Beginner - Intermediate Deep Lizard tutorials source code
 
 Deep Lizard's PyTorch Playlist is probably the best as of now - it starts from clearing fundametal concepts of tensors right upto using 
