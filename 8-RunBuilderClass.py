@@ -11,7 +11,7 @@ from torch.utils.tensorboard import SummaryWriter
 class Network(nn.Module):
     def __init__(self):
         super(Network, self).__init__()
-
+                                                                                                                                            
         self.conv1 = nn.Conv2d(in_channels = 1, out_channels = 6, kernel_size = 5)
         self.conv2 = nn.Conv2d(in_channels = 6, out_channels = 12, kernel_size = 5)
 
@@ -151,3 +151,4 @@ for run in RunBuilder.get_runs(parameters):
 
 
 tb.close()
+
