@@ -129,8 +129,6 @@ for epoch in range(3):
         tb.add_histogram(name,weight, epoch)
         tb.add_histogram(f'{name}.grad', weight.grad, epoch)
     
-    tb.add_histogram("Conv2.weight", network.conv2.weight, epoch)
-
 
     print("Epoch: ", epoch, "Loss: ", total_loss, "total_corect: ", total_correct, "Accuracy: ", total_correct/len(train_set))
 
@@ -146,25 +144,30 @@ print("Time Taken: ", datetime.now() - start)
 
 '''
 
-optimizer = optim.Adam(network.parameters(), lr = 0.01)
-
-tb = SummaryWriter()       
 
 network = Network()
 
-images,labels = next(iter(train_loader))
+batch_size = 32
+lr = 0.01
+
+train_loader = torch.utils.data.DataLoader(train_set, batch_size = batch_size)
+optimizer = optim.Adam(network.parameters(), lr = lr)
+
+image, labels = next(iter(train_loader))
 grid = torchvision.utils.make_grid(images)
 
+comment = f' batch_size = {batch_size} lr = {lr}'
+
+tb = SummaryWriter(comment = comment)
 tb.add_image('images', grid)
 tb.add_graph(network, images)
 
-for epoch in range(1):
+for epoch in range(2):
 
     total_loss = 0
     total_correct = 0
 
-    for batch in train_loader: 
-
+    for batch in train_loader:
         images, labels = batch
 
         preds = network(images)
@@ -174,19 +177,18 @@ for epoch in range(1):
 
         loss.backward()
         optimizer.step()
-        
-        total_loss += loss.item()
+
+        # NOTE: MULTIPLY BATCH_SIZE !!
+        total_loss += loss.item() * batch_size              ## V.V.IMPORTANT!!!!
         total_correct += get_num_correct(preds,labels)
 
     tb.add_scalar("Loss", total_loss, epoch)
-    tb.add_scalar("Number Correct", total_correct, epoch)
-    tb.add_scalar("Accuracy", total_correct /len(train_set), epoch)
+    tb.add_scalar("total_correct", total_correct, epoch)
+    tb.add_scalar("Accuracy", total_correct/len(train_set), epoch)
 
-    tb.add_histogram("Conv1.bias", network.conv1.bias, epoch)
-    tb.add_histogram("Conv1.weight", network.conv1.weight, epoch)
-    tb.add_histogram("Conv1.weight.grad", network.conv1.weight.grad, epoch)
-    
-    tb.add_histogram("Conv2.weight", network.conv2.weight, epoch)
+    for name, weight in network.named_parameters():
+        tb.add_histogram(name,weight, epoch)
+        tb.add_histogram(f'{name}.grad', weight.grad, epoch)
 
 
     print("Epoch: ", epoch, "Loss: ", total_loss, "total_corect: ", total_correct)

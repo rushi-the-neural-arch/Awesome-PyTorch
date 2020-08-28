@@ -26,12 +26,12 @@ class Network(nn.Module):
         # (1) Input Layer
         t = t
         
-        # (2) First Hidden layer
+        # (2) First Hidden Conv layer
         t = self.conv1(t)
         t = F.relu(t)
         t = F.max_pool2d(t, kernel_size = 2, stride = 2)
 
-        # (3) Second Hidden layer
+        # (3) Second Hidden Conv layer
         t = self.conv2(t)
         t = F.relu(t)
         t = F.max_pool2d(t, kernel_size = 2, stride = 2)
