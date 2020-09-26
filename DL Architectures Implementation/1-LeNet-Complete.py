@@ -29,12 +29,12 @@ transforms = transforms.Compose([transforms.Resize((32,32)),
                                  transforms.ToTensor()])          
 
 # download and create datasets
-train_dataset = datasets.FashionMNIST(root='/home/rushirajsinh/repos/DeepLizard-PyTorch/',
+train_dataset = datasets.FashionMNIST(root='/Users/rushirajsinhparmar/Downloads/PyTorch/',
                                       train = True,
                                       transform=transforms,
                                       download = False)
 
-valid_dataset = datasets.FashionMNIST(root='/home/rushirajsinh/repos/DeepLizard-PyTorch/',
+valid_dataset = datasets.FashionMNIST(root='/Users/rushirajsinhparmar/Downloads/PyTorch/',
                                       train = False,
                                       transform=transforms)
 
@@ -134,7 +134,7 @@ def train(train_loader, model, criterion, optimizer, device):
         # Forward pass       
         preds, _ = model(X)
         loss = criterion(preds, y_true)
-        running_loss += loss.item()*X.size(0) 
+        running_loss += loss.item()*X.size(0) # Loss over each batch is getting summed up iteratively
 
         # print("Loss.item() = ", loss.item()) - Prints out loss at every batch
         # print("RUNNING LOSS \n:", running_loss)
@@ -157,7 +157,7 @@ def train(train_loader, model, criterion, optimizer, device):
 
     # print(len(train_loader.dataset)) - 60,000
 
-    epoch_loss = running_loss / len(train_loader.dataset)
+    epoch_loss = running_loss / len(train_loader.dataset) # Loss over each epoch (Different than running loss)
     return model, optimizer, epoch_loss
 
 
@@ -191,7 +191,7 @@ def training_loop(model, criterion, optimizer,train_loader, valid_loader,
     '''
     Function defining the entire training loop
     '''
-    # set objects for storinh metrics
+    # set objects for storing metrics
     best_loss = 1e10
     train_losses = []
     valid_losses = []
