@@ -46,8 +46,8 @@ def save_checkpoint(state, filename = "my_checkpoint.pth.tar"):
 
 def load_checkpoint(checkpoint):
     print("=> Loading Checkpoint")
-    model.load_state_dict(checkpoint['state_dict'])
-    optimizer.load_state_dict(checkpoint['optimizer'])
+    model.load_state_dict(checkpoint['state_dict']) # V.V.IMP - Read the Dictionary
+    optimizer.load_state_dict(checkpoint['optimizer']) # That you saved and place the name in [] here accordingly
 
 # TODO: Set Device
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
