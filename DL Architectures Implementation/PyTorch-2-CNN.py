@@ -42,7 +42,8 @@ class CNN(nn.Module):
         x = self.fc1(x)
         
         return x
-    
+
+
 # Simple Testing    
 #model = CNN()
 #x = torch.randn(64,1,28,28)
