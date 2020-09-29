@@ -6,7 +6,7 @@ This repo is made in a lieu to combine and refactor all relevant PyTorch codes w
 
 - This work is a culumination of various available online free sources and a try to compile them in a neat way at one place possible
 
-**PyTorch Beginner - Intermediate Deep Lizard tutorials source code
+** PyTorch Beginner - Intermediate Deep Lizard tutorials source code
 
 Deep Lizard's PyTorch Playlist is probably the best as of now - it starts from clearing fundametal concepts of tensors right upto using 
 TensorBoard for Hyper Parameter testing and tuning and concepts like Batch Normalisation (more content might be added later on)
