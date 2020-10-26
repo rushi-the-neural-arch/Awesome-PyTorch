@@ -15,7 +15,7 @@ Check them out: https://deeplizard.com/learn/video/v5cngxo4mIg
 
 - PyTorch Intermediate - Advanced tutorials - Aladdin Persson
 
-If you already know the basics of PyTorch, this could be an awesome playlist for you to develop your skills further. It includes implementation of various Deep Learning Architectures like LeNet, InceptionNet, ResNet, GANs etc in a simple, lucid manner
+If you already know the basics of PyTorch, this could be an awesome playlist for you to develop your skills further. It includes implementation of various Deep Learning Architectures like LeNet, InceptionNet, ResNet, GANs etc in a simple, lucid manner.
 
 Check them out: https://www.youtube.com/playlist?list=PLhhyoLH6IjfxeoooqP9rhU3HJIAVAJ3Vz
 
