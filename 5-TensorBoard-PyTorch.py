@@ -1,5 +1,10 @@
 # Run: tensorboard --logdir=runs  in terminal to view in localhost
 
+# %load_ext tensorboard
+#%tensorboard --logdir runs
+
+
+
 from torch.utils.tensorboard import SummaryWriter
 
 import torch
