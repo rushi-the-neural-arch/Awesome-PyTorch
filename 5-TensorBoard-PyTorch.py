@@ -184,7 +184,7 @@ for epoch in range(2):
         optimizer.step()
 
         # NOTE: MULTIPLY BATCH_SIZE !!
-        total_loss += loss.item() * batch_size              ## V.V.IMPORTANT!!!!
+        total_loss += loss.item() * batch_size              ## V.V.IMPORTANT!!!
         total_correct += get_num_correct(preds,labels)
 
     tb.add_scalar("Loss", total_loss, epoch)
