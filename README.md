@@ -24,3 +24,9 @@ Further, a lot many medium blog posts and stackoverflow topics have helped me to
 If you want to CONTRIBUTE to this repo, feel free to open a pull request :)! Free education for everyone!
 
 It's a lot messy and vague right now, hopefully will clean this and re-organise it pro
+
+
+
+- To use Tensorboard in Google Colab
+    - %load_ext tensorboard
+    - %tensorboard --logdir /content/logs/         (directory path)
