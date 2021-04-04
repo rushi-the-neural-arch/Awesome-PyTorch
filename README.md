@@ -29,4 +29,4 @@ It's a lot messy and vague right now, hopefully will clean this and re-organise 
 
 - To use Tensorboard in Google Colab
     - %load_ext tensorboard
-    - %tensorboard --logdir /content/logs/         (directory path)
+    - %tensorboard --logdir /content/logs/       (directory path)
